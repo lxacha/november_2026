@@ -6,12 +6,13 @@
 /*   By: leolefeb <leolefeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/06 15:57:39 by leolefeb          #+#    #+#             */
-/*   Updated: 2026/11/07 23:09:36 by leolefeb         ###   ########.fr       */
+/*   Updated: 2026/11/07 23:17:59 by leolefeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <fcntl.h>
 #include <string.h>
 #include "get_next_line.h"
@@ -47,7 +48,7 @@ size_t	find_back_n(char *actual_read)
 	size_t	index_n;
 
 	index_n = 0;
-	while (actual_read[index_n] != '\n')
+	while (actual_read[index_n] != '\n' && actual_read[index_n] != '\0')
 		index_n++;
 	return (index_n);
 }
@@ -57,13 +58,15 @@ void	phrase_append(char *str_cuted,char *actual_read)
 	size_t	end;
 	size_t	start;
 	size_t	index_of_act_read;
-	char	*temp
+	char	*temp;
 	
 	index_of_act_read = 0;
 	start = ft_strlen(str_cuted);
 	end = find_back_n(actual_read);	
+	temp = malloc((start + end) * sizeof(char));
 	//if  \n is found
 	while(index_of_act_read <= end)
+		
 	//if \n is not found
 }
 
