@@ -6,7 +6,7 @@
 /*   By: leolefeb <leolefeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/06 15:57:39 by leolefeb          #+#    #+#             */
-/*   Updated: 2026/11/08 00:30:59 by leolefeb         ###   ########.fr       */
+/*   Updated: 2026/11/08 00:33:54 by leolefeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,15 @@ int	phrase_append(char *str_cuted,char *actual_read)
 	
 	index_of_act_read = 0;
 	start = ft_strlen(str_cuted);
-	end = find_back_n(actual_read);	
+	// end = find_back_n(actual_read);	
 	temp = malloc((start + end) * sizeof(char));
 	//if  \n is found return (1);
-	while(index_of_act_read <= end)
+	// while(index_of_act_read <= end)
 
 	
 		
 	//if \n is not found return (0);
+	return (0);
 }
 
 char	*get_next_line(int fd);
