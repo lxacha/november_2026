@@ -6,7 +6,7 @@
 /*   By: leolefeb <leolefeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/06 15:57:39 by leolefeb          #+#    #+#             */
-/*   Updated: 2026/11/07 23:17:59 by leolefeb         ###   ########.fr       */
+/*   Updated: 2026/11/08 00:30:59 by leolefeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,20 @@
 // 	printf("\n%s", buf_cont_str);
 // }
 
-size_t	find_back_n(char *actual_read)
+size_t	contain_n_0(char *actual_read)
 {
 	size_t	index_n;
 
 	index_n = 0;
 	while (actual_read[index_n] != '\n' && actual_read[index_n] != '\0')
+	{	
 		index_n++;
+		
+	}		
 	return (index_n);
 }
 
-void	phrase_append(char *str_cuted,char *actual_read)
+int	phrase_append(char *str_cuted,char *actual_read)
 {
 	size_t	end;
 	size_t	start;
@@ -64,10 +67,12 @@ void	phrase_append(char *str_cuted,char *actual_read)
 	start = ft_strlen(str_cuted);
 	end = find_back_n(actual_read);	
 	temp = malloc((start + end) * sizeof(char));
-	//if  \n is found
+	//if  \n is found return (1);
 	while(index_of_act_read <= end)
+
+	
 		
-	//if \n is not found
+	//if \n is not found return (0);
 }
 
 char	*get_next_line(int fd);
@@ -77,10 +82,11 @@ char	*get_next_line(int fd);
 	
 	if (!fd)
 		return NULL;
-	read(fd, actual_read, BUFFER_SIZE);
-	free(str_cuted);
-	phrase_append(str_cuted , actual_read);
-	
+	while(contain_n_0(actual_read) )
+	{
+		read(fd, actual_read, BUFFER_SIZE);
+		phrase_append(str_cuted , actual_read);
+	}
 	return (str_cuted);
 }
 
