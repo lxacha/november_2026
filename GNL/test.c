@@ -6,7 +6,7 @@
 /*   By: leolefeb <leolefeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/06 15:57:39 by leolefeb          #+#    #+#             */
-/*   Updated: 2026/11/08 00:33:54 by leolefeb         ###   ########.fr       */
+/*   Updated: 2026/11/08 18:58:11 by leolefeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include "get_next_line.h"
+
 
 // void	test_read(int	file_to_read)
 // {
@@ -51,42 +52,50 @@ size_t	contain_n_0(char *actual_read)
 	while (actual_read[index_n] != '\n' && actual_read[index_n] != '\0')
 	{	
 		index_n++;
-		
-	}		
+	}
 	return (index_n);
 }
 
-int	phrase_append(char *str_cuted,char *actual_read)
+char *phrase_append(char *str_cuted,char *actual_read)
 {
 	size_t	end;
 	size_t	start;
-	size_t	index_of_act_read;
+	size_t	index_temp;
+	size_t	index_act_read;
 	char	*temp;
 	
-	index_of_act_read = 0;
+	index_temp = 0;
+	index_act_read = 0;
 	start = ft_strlen(str_cuted);
-	// end = find_back_n(actual_read);	
+	end = contain_n_0(actual_read);	
 	temp = malloc((start + end) * sizeof(char));
-	//if  \n is found return (1);
-	// while(index_of_act_read <= end)
-
-	
-		
-	//if \n is not found return (0);
-	return (0);
+	while(index_temp < start && start != 0)
+	{
+		temp[index_temp] = str_cuted[index_temp];
+		index_temp++;
+	}
+	while(index_temp <= (start + end))
+	{
+		temp[index_temp] = actual_read[index_act_read];
+		index_act_read++;
+		index_temp++;
+	}
+	return (temp); // problem here
 }
 
-char	*get_next_line(int fd);
+char	*get_next_line(int fd)
 {
-	static char actual_read[BUFFER_SIZE];
+	static char actual_read[10];
 	static char *str_cuted;
 	
 	if (!fd)
-		return NULL;
-	while(contain_n_0(actual_read) )
+		return (NULL);
+	read(fd, actual_read, 10);
+	while(ft_strlen(actual_read) == (ft_strlen(str_cuted) - ft_strlen(actual_read)))
 	{
-		read(fd, actual_read, BUFFER_SIZE);
-		phrase_append(str_cuted , actual_read);
+		str_cuted = phrase_append(str_cuted , actual_read); // problem here
+		read(fd, actual_read, 10);
+		printf("%s\n", str_cuted);
 	}
 	return (str_cuted);
 }
