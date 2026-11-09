@@ -15,6 +15,31 @@
 #include <stdlib.h>
 #include "get_next_line.h"
 
+void	polish_list(t_list **list)
+{
+	t_list *last_node;
+	t_list *clean_node;
+
+	buf = malloc(BUFFER_SIZE + 1);
+	clean_node = malloc(sizeof(t_list));
+	if (buf == NULL|| clean_node == NULL)
+		return ;
+	last_node = find_last_node(*list);
+
+	i = 0;
+	k = 0;
+	while(last_node->str_buf[i] != '\0'
+		&& last_node->str_buf[i] != '\n')
+		i++;
+	while (last_node->str_buf[i] != '\0'
+		&& last_node->str_buf[++i])
+		buf[k++] = last_node->str_buf[i];
+	buf[k] = '\0';
+	clean_node->str_buf = buf;
+	clean_node->nex = NULL;
+	dealloc(lsit, clean_node, buf);
+}
+
 void	copy_str(t_list *list, char *str)
 {
 	size_t		i;
@@ -82,8 +107,8 @@ char	*get_line(t_list *lst)
 	return (next_str);
 }
 
-//len_to_newline x counts chars till newline
-//copy_str x 
+//len_to_newline v counts chars till newline
+//copy_str v
 
 size_t	found_newline(t_list *lst)
 {
@@ -170,8 +195,8 @@ char	*get_next_line(int fd)
 }
 
 //create_list v
-//get_line x
-//polish_list x
+//get_line v
+//polish_list v
 
 int		main(int argc, char **argv)
 {
