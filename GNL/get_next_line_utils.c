@@ -23,3 +23,12 @@ size_t	ft_strlen(char *str)
 		len++;
 	return len;
 }
+
+t_list	*find_last_node(t_list *lst)
+{
+	if (!lst)
+		return (NULL);
+	while (lst->next != NULL)
+		lst = lst->next;
+	return (lst);
+}
