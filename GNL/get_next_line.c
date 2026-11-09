@@ -15,6 +15,120 @@
 #include <stdlib.h>
 #include "get_next_line.h"
 
+void	copy_str(t_list *list, char *str)
+{
+	size_t		i;
+	size_t		k;
+
+	if (list == NULL)
+		return ;
+	k = 0;
+	while (list)
+	{
+		i = 0;
+		while (list->str_buf[i])
+		{
+			if (list->str_buf[i] == '\n')
+			{
+				str[k++] = '\n';
+				str[k] = '\0';
+				return ;
+			}
+			str[k++] = list->str_buf[i++];
+		}
+		list = list->next;
+	}
+	str[k] = '\0';
+}
+
+size_t	len_to_newline(t_list *list)
+{
+	size_t i;
+	size_t len;
+
+	if (list == NULL)
+		return (0);
+	len = 0;
+	while (list)
+	{
+		i = 0;
+		while (list->str_buf[i])
+		{
+			if (list->str_buf[i] == '\n')
+			{
+					len++;
+					return (len);
+			}
+			i++;
+			len++;
+		}
+		list = list->next;
+	}
+	return (len);
+}
+
+char	*get_line(t_list *lst)
+{
+	size_t		str_len;
+	char	*next_str;
+
+	if (list == NULL)
+		return (NULL);
+	str_len = len_to_newline(list);
+	nex_str = malloc(str_len + 1);
+	if (NULL == next_str)
+		return (NULL);
+	copy_str(list, next_str);
+	return (next_str);
+}
+
+//len_to_newline x counts chars till newline
+//copy_str x 
+
+size_t	found_newline(t_list *lst)
+{
+	size_t	index;
+
+	if (!lst)
+		return (NULL);
+	while(lst->content[index] != '\0')
+	{
+		if (lst->content[index] == '\n')
+			return (1);
+		index++;
+	}
+	return (NULL); 
+}
+
+t_list	*find_last_node(t_list *lst)
+{
+	if (!lst)
+		return (NULL);
+	while (lst->next != NULL)
+		lst = lst->next;
+	return (lst);
+}
+
+void	append(t_list **list, char *buf)
+{
+	t_list *new_node;
+	t_list *last_node;
+
+	last_node = find_last_node(*list);
+	new_node = malloc(sizeof(t_list));
+	if (new_node == NULL)
+		return ;
+	if (last_node == NULL)
+		*list = new_node;
+	else
+		last_node->next = new_node;
+
+	new_node->str_buf = buf;
+	new_node->next = NULL;
+}
+
+//find_last_node v
+
 void	create_list(t_list **list, int fd)
 {
 	int		char_read;
@@ -25,6 +139,7 @@ void	create_list(t_list **list, int fd)
 		buf = malloc(BUFFER_SIZE + 1);
 		if (buf == NULL)
 			return ;
+		char_read = read(fd, buf, BUFFER_SIZE);
 		if (!char_read)
 		{
 			free(buf);
@@ -34,6 +149,10 @@ void	create_list(t_list **list, int fd)
 		append(list, buf);
 	}
 }
+
+//create_list v
+//append v
+//found newline v
 
 char	*get_next_line(int fd)
 {
@@ -49,6 +168,10 @@ char	*get_next_line(int fd)
 	polish_list(&list)
 	return (next_line);
 }
+
+//create_list v
+//get_line x
+//polish_list x
 
 int		main(int argc, char **argv)
 {
