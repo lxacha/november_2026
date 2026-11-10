@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "get_next_line.h"
 
 void	dealloc(t_list **list, t_list *clean_node, char *buf)
@@ -138,21 +139,6 @@ char	*get_line(t_list *list)
 //len_to_newline v counts chars till newline
 //copy_str v
 
-size_t	found_newline(t_list *lst)
-{
-	size_t	index;
-
-	if (!lst)
-		return (NULL);
-	while(lst->content[index] != '\0')
-	{
-		if (lst->content[index] == '\n')
-			return (1);
-		index++;
-	}
-	return (NULL); 
-}
-
 void	append(t_list **list, char *buf)
 {
 	t_list *new_node;
@@ -201,9 +187,9 @@ void	create_list(t_list **list, int fd)
 char	*get_next_line(int fd)
 {
 	static t_list *list = NULL;
-	char	*current_read;
+	char	*next_line;
 	
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &current_read, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &next_line, 0) < 0)
 		return (NULL);	
 	create_list(&list, fd);
 	if (list == NULL)
@@ -229,7 +215,15 @@ int		main(int argc, char **argv)
 	{
 		char *text_file_name = "whatever.txt";
 		int fd = open(text_file_name, O_RDONLY);
-		get_next_line(fd);
-		get_next_line(fd);
+		
+		printf("%s",get_next_line(fd));
+		printf("%s",get_next_line(fd));
+		printf("%s",get_next_line(fd));
+		printf("%s",get_next_line(fd));
+		printf("%s",get_next_line(fd));
+		printf("%s",get_next_line(fd));
+		printf("%s",get_next_line(fd));
+
+
 	}
 }

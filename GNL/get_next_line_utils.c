@@ -32,3 +32,23 @@ t_list	*find_last_node(t_list *lst)
 		lst = lst->next;
 	return (lst);
 }
+
+int	found_newline(t_list *list)
+{
+	int	i;
+
+	if (NULL == list)
+		return (0);
+	while (list)
+	{
+		i = 0;
+		while (list->buf_read[i] && i < BUFFER_SIZE)
+		{
+			if (list->buf_read[i] == '\n')
+				return (1);
+			++i;
+		}
+		list = list->next;
+	}
+	return (0);
+}

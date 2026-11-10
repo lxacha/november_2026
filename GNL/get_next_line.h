@@ -34,7 +34,7 @@ void	polish_list(t_list **list);
 void	copy_str(t_list *list, char *str);
 size_t	len_to_newline(t_list *list);
 char	*get_line(t_list *lst);
-size_t	found_newline(t_list *lst);
+int	found_newline(t_list *list);
 void	append(t_list **list, char *buf);
 void	create_list(t_list **list, int fd);
 char	*get_next_line(int fd);
