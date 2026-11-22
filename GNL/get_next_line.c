@@ -6,7 +6,7 @@
 /*   By: leolefeb <leolefeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/06 15:35:59 by leolefeb          #+#    #+#             */
-/*   Updated: 2026/11/06 18:13:46 by leolefeb         ###   ########.fr       */
+/*   Updated: 2026/11/21 18:45:02 by leolefeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,6 @@ char	*get_line(t_list *list)
 
 //len_to_newline v counts chars till newline
 //copy_str v
-
 void	append(t_list **list, char *buf)
 {
 	t_list *new_node;
@@ -203,6 +202,7 @@ char	*get_next_line(int fd)
 //get_line v
 //polish_list v
 
+/*
 int		main(int argc, char **argv)
 {
 	if (argv[1])
@@ -227,3 +227,4 @@ int		main(int argc, char **argv)
 
 	}
 }
+*/
